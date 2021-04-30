@@ -1,12 +1,12 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
-	<Script file="localization.en.lua"/>
-	<Script file="localization.esES.lua"/>
-	<Script file="localization.frFR.lua"/>
-	<Script file="localization.deDE.lua"/>
-	<Script file="localization.zhTW.lua"/>
-	<Script file="localization.zhCN.lua"/>
-	<Script file="localization.koKR.lua"/>
-	<Script file="localization.ruRU.lua"/>
+	<Script file="locales\localization.en.lua"/>
+	<Script file="locales\localization.esES.lua"/>
+	<Script file="locales\localization.frFR.lua"/>
+	<Script file="locales\localization.deDE.lua"/>
+	<Script file="locales\localization.zhTW.lua"/>
+	<Script file="locales\localization.zhCN.lua"/>
+	<Script file="locales\localization.koKR.lua"/>
+	<Script file="locales\localization.ruRU.lua"/>
 	<Script file="PreformAVEnabler.lua"/>
 
 	<Frame name="PreformAVEnablerMemberTemplate" virtual="true">
@@ -378,9 +378,9 @@
 						</Anchor>
 					</Anchors>
 				</Texture>
-				
+
 				<!-- Frame header label -->
-				<FontString inherits="GameFontNormal" text="PREFORM_AV_ENABLER_SELF">
+				<FontString name="$parentTitle" inherits="GameFontNormal" text="PREFORM_AV_ENABLER_SELF">
 					<Anchors>
 						<Anchor point="TOP">
 							<Offset>
@@ -591,7 +591,7 @@
 				<ScrollChild>
 					<Frame name="$parentChildFrame">
 						<Size>
-							<AbsDimension x="1028" y="604"/>
+							<AbsDimension x="1028" y="600"/>
 						</Size>
 						<Frames>
 
@@ -889,7 +889,7 @@
 								</Anchor>
 							</Anchors>
 						</FontString>
-						<FontString inherits="GameFontHighlightSmall" text="40">
+						<FontString name="$parentMinValue" inherits="GameFontHighlightSmall" text="40">
 							<Anchors>
 								<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT">
 									<Offset>
@@ -898,7 +898,7 @@
 								</Anchor>
 							</Anchors>
 						</FontString>
-						<FontString inherits="GameFontHighlightSmall" text="5">
+						<FontString name="$parentMaxValue" inherits="GameFontHighlightSmall" text="5">
 							<Anchors>
 								<Anchor point="TOPLEFT" relativePoint="TOPRIGHT">
 									<Offset>

@@ -3,6 +3,8 @@
 -- if this file is posted to a web site, credit must be given to me along with a link to my web page
 -- no code in this file may be used in other works without expressed permission
 
+local PreformAVEnabler = LibStub("AceAddon-3.0"):NewAddon("PreformAVEnabler")
+
 local PreformAVEnabler_Version = tonumber(GetAddOnMetadata("PreformAVEnabler", "Version"));
 local PreformAVEnabler_Status = {};
 local PreformAVEnabler_MyStatus = { frame = 0, deserter = 0, };
@@ -14,7 +16,7 @@ local PreformAVEnabler_AnywhereQueueId = nil;
 local PreformAVEnabler_OnUpdateTime = 0;	-- used to prevent redundant status redraws
 local PreformAVEnabler_Debug = false;
 local PreformAVEnabler_NewGroup = true;		-- send status update when joing new group
-local PreformAVEnabler_LastStatus = "";		-- used to prevent 
+local PreformAVEnabler_LastStatus = "";		-- used to prevent
 local PreformAVEnabler_LastStatusTime = 0;	-- redundant status sending
 local PreformAVEnabler_WaitUntilReady = false;	-- to prevent leave queue spam
 --local PreformAVEnabler_QTime = 0;			-- timestamp of when queued
@@ -125,6 +127,7 @@ function PreformAVEnablerFrame_OnLoad(frame)
 	frame:RegisterEvent("PLAYER_REGEN_ENABLED");
 	frame:RegisterEvent("VARIABLES_LOADED");
 
+	PreformAVEnabler:CreateMinimapBtn();
 	PreformAVEnabler_SetWidgets();
 	BattlefieldFrame:HookScript("OnShow", PreformAVEnabler_BattlefieldFrameOnShowHook);
 	BattlefieldFrame:HookScript("OnHide", PreformAVEnabler_BattlefieldFrameOnHideHook);
@@ -138,7 +141,7 @@ function PreformAVEnablerFrame_OnLoad(frame)
 
 	-- stripe the backgrounds
 	for i = 2, 40, 2 do
-		getglobal("PreformAVEnablerMember"..i):SetBackdrop({bgFile = "Interface/Tooltips/UI-Tooltip-Background", 
+		getglobal("PreformAVEnablerMember"..i):SetBackdrop({bgFile = "Interface/Tooltips/UI-Tooltip-Background",
 								    tile = true, tileSize = 16, edgeSize = 16, });
 		getglobal("PreformAVEnablerMember"..i):SetBackdropColor(1, 1, 1, .2);
 	end
@@ -340,7 +343,7 @@ function PreformAVEnabler_Queue(bg, queueId)
 	PVPBattlegroundFrame.selectedBG = bg;
 
 	for id = 1, NUM_BGS do
-	   
+
 		if ( GetBattlegroundInfo(id) == BG_NAME[bg] ) then
 
 			if ( PreformAVEnabler_Debug ) then
@@ -392,7 +395,7 @@ function PreformAVEnabler_Tally(bg)
 	-- queued people,
 	-- total raid members that are able to queue,
 	-- is everybody ready?
-	
+
 	local val;
 	local allReady = true;
 	local people = 0;
@@ -695,7 +698,7 @@ function PreformAVEnabler_DetermineStatus()
 
 		elseif ( status == "active" ) then
 			PreformAVEnabler_MyStatus[i].status = 3;
-		
+
 		else
 			PreformAVEnabler_MyStatus[i].status = 0;
 		end
@@ -713,7 +716,7 @@ function PreformAVEnabler_HidePopupsExcept(bg)
 	local qid;
 
 	for i = 1, NUM_BGS do
-		
+
 		_, _, qid = PreformAVEnabler_BGStatus(i);
 
 		if ( qid > 0 and bg ~= i ) then
@@ -750,7 +753,7 @@ function PreformAVEnabler_Join(bg, joinThis)
 --[[
 			if ( not PreformAVEnabler_ForcedJoin ) then
 				DEFAULT_CHAT_FRAME:AddMessage(format(PREFORM_AV_ENABLER_JOIN_THIS, BG_NAME[bg], joinThis or ""));
-				return			
+				return
 			end
 
 			if ( not UnitIsAFK("player") ) then
@@ -768,7 +771,7 @@ function PreformAVEnabler_Join(bg, joinThis)
 		end
 
 		return
-	
+
 	elseif ( status == "queued" ) then
 
 		if ( joinThis ) then
@@ -877,7 +880,7 @@ function PreformAVEnabler_ParseAddonMsg(msg, sender)
 		PreformAVEnabler_PaintWindow();
 		PreformAVEnabler_Leader();
 
-	
+
 	elseif ( vars[1] == "statuscheck" ) then
 
 		if ( PreformAVEnabler_Debug ) then
@@ -1339,9 +1342,9 @@ function PreformAVEnabler_GetMembers()
 	-- or if thresholder slider visible and player is not leader
 	-- or is threshold slider not visible and player leader
 	-- bit of a kludge, but I don't want to call SetWidets unnecessarily
-	if (	#PreformAVEnabler_Members == 1 
-		or (PreformAVEnablerThresholdSlider:IsShown() and PreformAVEnabler_RaidLeader ~= UnitName("player") ) 
-		or (not PreformAVEnablerThresholdSlider:IsShown() and PreformAVEnabler_RaidLeader == UnitName("player") ) 
+	if (	#PreformAVEnabler_Members == 1
+		or (PreformAVEnablerThresholdSlider:IsShown() and PreformAVEnabler_RaidLeader ~= UnitName("player") )
+		or (not PreformAVEnablerThresholdSlider:IsShown() and PreformAVEnabler_RaidLeader == UnitName("player") )
 	) then
 		PreformAVEnabler_SetWidgets();
 		PreformAVEnabler_CheckBMs();
@@ -1372,7 +1375,7 @@ function PreformAVEnabler_CheckDeserter()
 	local name, timeLeft;
 
 	for i=1, MAX_PARTY_DEBUFFS do
-		--  name, rank, icon, count, debuffType, duration, expirationTime, isMine, isStealable = UnitDebuff("unit", [index] or ["name", "rank"]) 
+		--  name, rank, icon, count, debuffType, duration, expirationTime, isMine, isStealable = UnitDebuff("unit", [index] or ["name", "rank"])
 		name, _, _, _, _, _, timeLeft = UnitDebuff("player", i);
 		if ( name == PREFORM_AV_ENABLER_DESERTER ) then
 			return math.ceil( timeLeft - GetTime() );
@@ -1778,7 +1781,7 @@ function PreformAVEnablerFrame_OnUpdate(self, arg)
 		if ( members < 5 ) then
 			return
 		end
-		
+
 		local padding = 115;
 		if ( PreformAVEnabler_RaidLeader == UnitName("player") ) then
 			padding = 190;
@@ -1786,7 +1789,7 @@ function PreformAVEnablerFrame_OnUpdate(self, arg)
 
 		local min = 15 * 5 + padding - 2;
 		local max = members * 15 + padding;
-		
+
 		if ( h < min ) then
 			h = min;
 		end
@@ -2072,4 +2075,35 @@ function PreformAVEnabler_IfSecure()
 		UIErrorsFrame:AddMessage( ERR_NOT_IN_COMBAT, 1.0, 0.1, 0.1, 1.0 );
 		return true
 	end
+end
+
+function PreformAVEnabler:CreateMinimapBtn()
+	local LDB = LibStub ("LibDataBroker-1.1", true)
+	local LDBIcon = LDB and LibStub ("LibDBIcon-1.0", true)
+
+	self.db = LibStub("AceDB-3.0"):New("PreformAVEnablerDB", {
+        profile = {
+            minimap = {
+                hide = false,
+            },
+        },
+    })
+
+	local PreformAVEnablerLDB = LDB:NewDataObject("PreformAVEnabler", {
+		type = "data source",
+		icon = [[Interface\AddOns\PreformAVEnabler\media\INV_Misc_GroupNeedMore]],
+		HotCornerIgnore = true,
+		OnClick = function(self, button)
+			if(PreformAVEnablerFrame:IsShown()) then
+				PreformAVEnablerFrame:Hide();
+			else
+				PreformAVEnablerFrame:Show();
+			end
+		end,
+		OnTooltipShow = function (tooltip)
+			tooltip:AddLine ("PreformAVEnabler", 1, 1, 1)
+			tooltip:AddLine ("|cFFCFCFCFctrl + left click|r: show/hide windows")
+		end,
+	})
+	LDBIcon:Register("PreformAVEnabler", PreformAVEnablerLDB, self.db.profile.minimap)
 end
