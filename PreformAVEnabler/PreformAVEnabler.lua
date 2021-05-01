@@ -1680,9 +1680,9 @@ function PreformAVEnabler_ResizeFrame()
 	PreformAVEnablerMembersScrollFrameChildFrame:SetHeight(height);
 
 	if ( (IsRaidLeader() or IsPartyLeader()) ) then
-		PreformAVEnablerMajorityText1:SetPoint("BOTTOMLEFT", PreformAVEnablerFrame, "BOTTOMLEFT", 140, 130);
+		PreformAVEnablerMajorityText1:SetPoint("BOTTOMLEFT", PreformAVEnablerFrame, "BOTTOMLEFT", 140, 115); --130
 	else
-		PreformAVEnablerMajorityText1:SetPoint("BOTTOMLEFT", PreformAVEnablerFrame, "BOTTOMLEFT", 140, 57);
+		PreformAVEnablerMajorityText1:SetPoint("BOTTOMLEFT", PreformAVEnablerFrame, "BOTTOMLEFT", 140, 45); --57
 	end
 end
 
@@ -2101,8 +2101,8 @@ function PreformAVEnabler:CreateMinimapBtn()
 			end
 		end,
 		OnTooltipShow = function (tooltip)
-			tooltip:AddLine ("PreformAVEnabler", 1, 1, 1)
-			tooltip:AddLine ("|cFFCFCFCFLeft Click|r: show/hide Group Windows")
+			tooltip:AddLine ("|cffe5e3e3PreformAVEnabler|r |cff1784d1Enhanced|r")
+			tooltip:AddLine ("|cff1784d1Left Click|r: show/hide PreformAVEnabler UI")
 		end,
 	})
 	LDBIcon:Register("PreformAVEnabler", PreformAVEnablerLDB, self.db.profile.minimap)

@@ -690,12 +690,12 @@
 			<!-- Status Check button -->
 			<Button name="PreformAVEnablerFrameStatusButton" inherits="GameMenuButtonTemplate" text="PREFORM_AV_ENABLER_STATUSCHECK">
 				<Size>
-					<AbsDimension x="100" y="24"/>
+					<AbsDimension x="100" y="20"/>
 				</Size>
 				<Anchors>
 					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT">
 						<Offset>
-							<AbsDimension x="20" y="20" />
+							<AbsDimension x="20" y="13" />
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -936,12 +936,12 @@
 			<!-- Close Button -->
 			<Button name="PreformAVEnablerFrameCloseButton" inherits="GameMenuButtonTemplate" text="CLOSE">
 				<Size>
-					<AbsDimension x="100" y="24"/>
+					<AbsDimension x="100" y="20"/>
 				</Size>
 				<Anchors>
 					<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT">
 						<Offset>
-							<AbsDimension x="-20" y="20" />
+							<AbsDimension x="-20" y="13" />
 						</Offset>
 					</Anchor>
 				</Anchors>

@@ -1,5 +1,5 @@
 ## Interface: 30300
-## Title: Preform AV Enabler
+## Title: |cffe5e3e3PreformAVEnabler|r |cff1784d1Enhanced|r
 ## Notes: Synchronized solo queuing of battlegrounds
 ## Notes-deDE: Automatisiert synchronisiertes Betreten des Alteractals
 ## Author: Torrid
