@@ -2102,7 +2102,7 @@ function PreformAVEnabler:CreateMinimapBtn()
 		end,
 		OnTooltipShow = function (tooltip)
 			tooltip:AddLine ("PreformAVEnabler", 1, 1, 1)
-			tooltip:AddLine ("|cFFCFCFCFctrl + left click|r: show/hide windows")
+			tooltip:AddLine ("|cFFCFCFCFLeft Click|r: show/hide Group Windows")
 		end,
 	})
 	LDBIcon:Register("PreformAVEnabler", PreformAVEnablerLDB, self.db.profile.minimap)
